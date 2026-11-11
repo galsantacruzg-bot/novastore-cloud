@@ -14,3 +14,9 @@
 .idea/
 .DS_Store
 Thumbs.db
+
+# Archivos OAuth locales, nunca versionar.
+client_secret*.json
+*client_secret*.json
+.novastore-private/
+**/railway-gmail.env
