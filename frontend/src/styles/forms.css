@@ -1,0 +1,1 @@
+input:focus,select:focus,textarea:focus,button:focus-visible,a:focus-visible{outline:3px solid var(--lime);outline-offset:2px}input.ng-invalid.ng-touched,textarea.ng-invalid.ng-touched,select.ng-invalid.ng-touched{border-color:#c83b2c!important;background:#fff0ed!important}button:disabled{opacity:.55;cursor:not-allowed}

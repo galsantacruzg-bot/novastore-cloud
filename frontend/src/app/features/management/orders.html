@@ -1,0 +1,32 @@
+<section class="page-hero compact">
+  <div class="shell"><p class="eyebrow">PEDIDOS / RELACIONES</p><h1>Angular registra. <span>Spring calcula.</span></h1><p>El Front-end envía IDs y cantidades; el Back-end valida stock, obtiene precios y persiste el pedido.</p></div>
+</section>
+
+<section class="section">
+  <div class="shell orders-layout">
+    <form class="order-form" [formGroup]="form" (ngSubmit)="createOrder()">
+      <p class="eyebrow">POST /API/ORDERS</p><h2>Nuevo pedido</h2>
+      <label>Cliente
+        <select formControlName="customerId"><option [ngValue]="0">Seleccionar…</option>@for(c of customers();track c.id){<option [ngValue]="c.id">{{ c.name }}</option>}</select>
+      </label>
+      <label>Producto
+        <select formControlName="productId"><option [ngValue]="0">Seleccionar…</option>@for(p of products();track p.id){<option [ngValue]="p.id">{{ p.name }} · stock {{ p.stock }}</option>}</select>
+      </label>
+      <label>Cantidad<input type="number" min="1" max="20" formControlName="quantity"></label>
+      @if(error()){<div class="inline-error">{{ error() }}</div>}
+      @if(message()){<div class="inline-success">{{ message() }}</div>}
+      <button class="btn btn-dark full" type="submit">Crear pedido</button>
+    </form>
+
+    <div class="orders-list">
+      <div class="list-title"><div><p class="eyebrow">GET /API/ORDERS</p><h2>Pedidos persistidos</h2></div><button class="link-btn" (click)="refreshAll()">↻ Actualizar</button></div>
+      @for(order of orders();track order.id){
+        <article class="order-card">
+          <div class="order-main"><span>#{{ order.id }}</span><div><strong>{{ order.customerName }}</strong><small>{{ order.customerEmail }}</small></div><b>{{ order.total | currency:'USD' }}</b><em>{{ order.status }}</em></div>
+          <div class="order-items">@for(item of order.items;track item.id){<span>{{ item.quantity }}× {{ item.productName }} · {{ item.subtotal | currency:'USD' }}</span>}</div>
+          <small>{{ order.createdAt | date:'medium' }}</small>
+        </article>
+      } @empty { <div class="empty-panel">Todavía no existen pedidos.</div> }
+    </div>
+  </div>
+</section>

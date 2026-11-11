@@ -1,0 +1,7 @@
+<button class="api-status" type="button" (click)="status.check()"
+  [class.online]="status.online() === true"
+  [class.offline]="status.online() === false"
+  title="Haz clic para volver a comprobar la API">
+  <span class="dot"></span>
+  <span>{{ status.message() }}</span>
+</button>

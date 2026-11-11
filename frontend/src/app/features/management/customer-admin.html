@@ -1,0 +1,34 @@
+<section class="page-hero compact">
+  <div class="shell"><p class="eyebrow">CRUD / CLIENTES</p><h1>Datos de clientes <span>desde la base.</span></h1><p>Segunda interfaz CRUD para evidenciar reutilización de servicios HTTP y formularios reactivos.</p></div>
+</section>
+
+<section class="section">
+  <div class="shell customers-layout">
+    <form class="customer-form" [formGroup]="form" (ngSubmit)="save()">
+      <p class="eyebrow">{{ selectedId() ? 'PUT /API/CUSTOMERS/' + selectedId() : 'POST /API/CUSTOMERS' }}</p>
+      <h2>{{ selectedId() ? 'Editar cliente' : 'Registrar cliente' }}</h2>
+      <label>Nombre<input formControlName="name"></label>
+      <label>Correo<input type="email" formControlName="email"></label>
+      <label>Teléfono<input formControlName="phone"></label>
+      @if(error()){<div class="inline-error">{{ error() }}</div>}
+      @if(message()){<div class="inline-success">{{ message() }}</div>}
+      <button class="btn btn-dark full" type="submit">{{ selectedId() ? 'Actualizar (PUT)' : 'Registrar (POST)' }}</button>
+      @if(selectedId()){<button class="btn btn-outline full" type="button" (click)="cancel()">Cancelar</button>}
+    </form>
+
+    <div class="customer-list">
+      <div class="list-title"><div><p class="eyebrow">GET /API/CUSTOMERS</p><h2>Clientes almacenados</h2></div><button class="link-btn" (click)="load()">↻ Actualizar</button></div>
+      <div class="customer-grid">
+        @for(customer of customers(); track customer.id){
+          <article>
+            <span>#{{ customer.id }}</span>
+            <h3>{{ customer.name }}</h3>
+            <p>{{ customer.email }}</p>
+            <p>{{ customer.phone }}</p>
+            <div><button (click)="edit(customer)">Editar</button><button class="danger" (click)="remove(customer)">Eliminar</button></div>
+          </article>
+        }
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,12 @@
+:root{
+ --paper:#f9faf8;
+ --paper-2:#eef1f4;
+ --ink:#101827;
+ --muted:#667283;
+ --line:#d9e0e6;
+ --coral:#6c55de;
+ --blue:#5c4bc9;
+ --lime:#c2ff66;
+ --font-display:Inter,"Segoe UI",Arial,Helvetica,sans-serif;
+ --font-body:Inter,"Segoe UI",Arial,Helvetica,sans-serif;
+}

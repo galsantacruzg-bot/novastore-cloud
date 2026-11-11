@@ -1,0 +1,34 @@
+<section class="page-hero compact cart-hero">
+  <div class="shell"><p class="eyebrow">CARRITO NOVASTORE</p><h1>Tu selección, <span>a tu manera.</span></h1><p>Registra pedidos de demostración en PostgreSQL desde cualquier dispositivo. No se procesan pagos reales.</p></div>
+</section>
+<section class="section">
+  <div class="shell cart-layout">
+    <div class="cart-lines">
+      <div class="cart-title"><h2>Tu carrito</h2><strong>{{ cart.count() }} unidades</strong></div>
+      @for(line of cart.items(); track line.product.id) {
+        <article class="cart-line">
+          <img [src]="line.product.image" [alt]="line.product.name" (error)="$any($event.target).src='assets/products/headphones.svg'">
+          <div><small>{{ line.product.brand }}</small><h3>{{ line.product.name }}</h3><strong>{{ line.product.price | currency:'USD' }}</strong></div>
+          <div class="qty"><button (click)="cart.change(line.product.id!, line.quantity-1)">−</button><span>{{ line.quantity }}</span><button (click)="cart.change(line.product.id!, line.quantity+1)">+</button></div>
+          <button class="remove" (click)="cart.remove(line.product.id!)">Eliminar</button>
+        </article>
+      } @empty {
+        <div class="empty-panel"><strong>Tu carrito está vacío.</strong><p>Agrega productos desde el catálogo.</p><a routerLink="/productos" class="text-action">Ir a productos →</a></div>
+      }
+      @if(cart.items().length){<div class="cart-total"><span>TOTAL</span><strong>{{ cart.total() | currency:'USD' }}</strong></div>}
+    </div>
+
+
+    <form class="checkout-card" [formGroup]="checkoutForm" (ngSubmit)="checkout()">
+      <p class="eyebrow">DATOS DE ENTREGA</p><h2>Finalizar compra</h2>
+      <label>Nombre completo<input formControlName="name"></label>
+      <label>Correo<input type="email" formControlName="email"></label>
+      <label>Teléfono<input formControlName="phone"></label>
+      <label>Dirección<textarea rows="4" formControlName="shippingAddress" placeholder="Ciudad, sector, calle y referencia"></textarea></label>
+      <p class="checkout-note">Esta versión registra el pedido y descuenta stock. No procesa tarjetas bancarias ni cobros reales.</p>
+      @if(error()){<div class="inline-error">{{ error() }}</div>}
+      @if(message()){<div class="inline-success">{{ message() }}</div>}
+      <button class="btn btn-dark full" type="submit" [disabled]="busy() || !cart.items().length">{{ busy() ? 'Registrando…' : 'Confirmar pedido' }}</button>
+    </form>
+  </div>
+</section>

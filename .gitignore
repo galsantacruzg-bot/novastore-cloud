@@ -1,0 +1,16 @@
+# Secretos y archivos locales (jamás subir credenciales)
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+# Artefactos
+**/node_modules/
+**/dist/
+**/.angular/
+**/target/
+**/*.log
+.idea/
+.DS_Store
+Thumbs.db

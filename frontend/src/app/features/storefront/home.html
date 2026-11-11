@@ -1,0 +1,79 @@
+<section class="hero">
+  <div class="shell hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow light-eyebrow"><span class="live-dot"></span> NOVASTORE / TECH ESSENTIALS</p>
+      <h1>Tu siguiente <em>nivel</em> comienza aquí<span class="period">.</span></h1>
+      <p class="hero-lead">Accesorios tecnológicos para trabajar mejor, jugar más cómodo y llevar tu setup a otro nivel. Diseño, funcionalidad y una experiencia de compra sin complicaciones.</p>
+      <div class="hero-actions">
+        <a class="btn btn-lime" routerLink="/productos">Explorar catálogo <span aria-hidden="true">↗</span></a>
+        <a class="btn btn-ghost" routerLink="/integracion">Conocer NovaStore <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="hero-footnote"><span class="tiny-stars">✦ ✦ ✦</span><span>Tu tecnología, mejor seleccionada.</span></div>
+    </div>
+    <div class="hero-visual" aria-label="Composición gráfica de accesorios tecnológicos destacados">
+      <div class="visual-grid" aria-hidden="true"></div>
+      <div class="visual-glow" aria-hidden="true"></div>
+      <div class="visual-caption">EDICIÓN <b>2026</b> <span> / PRODUCTOS PARA TU SETUP</span></div>
+      <div class="feature-halo" aria-hidden="true"></div>
+      <img class="visual-product visual-headphones" src="assets/products/headphones.svg" alt="Audífonos tecnológicos destacados">
+      <div class="visual-mini visual-mini-one"><img src="assets/products/keyboard.svg" alt=""><span>WORK + PLAY</span></div>
+      <div class="visual-mini visual-mini-two"><img src="assets/products/gamepad.svg" alt=""><span>POWER YOUR PLAY</span></div>
+      <div class="visual-stamp" aria-label="Selección tech">NOVA<br><strong>SELECT</strong><span>✳</span></div>
+      <div class="visual-bottom-note">01 / 03 <span>HARDWARE & ACCESSORIES</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="value-band" aria-label="Nuestra propuesta de valor">
+  <div class="shell value-grid">
+    <article><span>01</span><div><strong>Selección inteligente</strong><p>Accesorios útiles y funcionales</p></div></article>
+    <article><span>02</span><div><strong>Experiencia sencilla</strong><p>Descubre y compara en segundos</p></div></article>
+    <article><span>03</span><div><strong>Compra demostrativa</strong><p>Proyecto académico en evolución</p></div></article>
+  </div>
+</section>
+
+<section class="section collection-section">
+  <div class="shell">
+    <header class="section-head collection-head">
+      <div><p class="eyebrow">ENCUENTRA TU PRÓXIMO FAVORITO</p><h2>Equipamiento que <span>marca la diferencia.</span></h2></div>
+      <a class="collection-link" routerLink="/productos">Ver todo el catálogo <span aria-hidden="true">↗</span></a>
+    </header>
+    @if (loading()) { <div class="loading-panel" role="status">Conectando con nuestro catálogo…</div> }
+    @else if (error()) { <div class="error-panel" role="alert"><strong>Por ahora no podemos cargar el catálogo.</strong><p>{{ error() }}</p><a routerLink="/integracion">Comprobar servicio</a></div> }
+    @else {
+      <div class="featured-grid">
+        @for (product of products(); track product.id) {
+          <article class="product-card">
+            <a class="product-image" routerLink="/productos" [attr.aria-label]="'Explorar ' + product.name">
+              <img [src]="product.image" [alt]="product.name" loading="lazy" (error)="$any($event.target).src='assets/products/headphones.svg'">
+              <span class="product-label">{{ product.category }}</span>
+              <span class="product-image-arrow" aria-hidden="true">↗</span>
+            </a>
+            <div class="product-info">
+              <div class="product-kicker">{{ product.brand }} · {{ product.code }}</div>
+              <h3>{{ product.name }}</h3>
+              <p>{{ product.description }}</p>
+              <div class="product-bottom"><strong>{{ product.price | currency:'USD' }}</strong><span>{{ product.stock > 0 ? 'Disponible' : 'Agotado' }}</span></div>
+            </div>
+          </article>
+        } @empty { <div class="empty-panel"><strong>Próximamente</strong><p>Estamos preparando nuestra selección.</p></div> }
+      </div>
+    }
+  </div>
+</section>
+
+<section class="banner-section">
+  <div class="shell">
+    <div class="setup-banner">
+      <div><p class="eyebrow light-eyebrow">NOVA JOURNAL / #001</p><h2>Tu espacio.<br><em>Tus reglas.</em></h2><p>Desde tu escritorio hasta tu zona de juego, los detalles hacen la diferencia.</p><a routerLink="/productos" class="btn btn-lime">Descubrir accesorios ↗</a></div>
+      <div class="banner-art" aria-hidden="true"><div class="banner-orbit"></div><img src="assets/products/keyboard.svg" alt=""><span>BUILD YOUR SPACE ✳</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section project-section">
+  <div class="shell project-grid">
+    <div><p class="eyebrow">EL FUTURO DE NOVASTORE</p><h2>Una tienda que <span>crece contigo.</span></h2></div>
+    <div><p>NovaStore es una plataforma de comercio electrónico construida para evolucionar: catálogo dinámico, inventario, carrito y pedidos registrados mediante una API REST y una base de datos relacional.</p><p class="demo-warning">Versión académica demostrativa: todavía no procesa pagos reales ni garantiza entregas comerciales.</p><a routerLink="/integracion" class="text-action">Conocer la tecnología detrás de la tienda →</a></div>
+  </div>
+</section>

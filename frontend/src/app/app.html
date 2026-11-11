@@ -1,0 +1,10 @@
+@if (!authScreen()) {
+  <app-api-status></app-api-status>
+  <app-header></app-header>
+}
+<main class="app-main" [class.auth-only]="authScreen()">
+  <router-outlet></router-outlet>
+</main>
+@if (!authScreen()) {
+  <app-footer></app-footer>
+}

@@ -1,0 +1,27 @@
+<section class="page-hero compact"><div class="shell"><p class="eyebrow">DOCUMENTACIÓN FUNCIONAL</p><h1>Angular → API → <span>PostgreSQL.</span></h1><p>La base se administra visualmente con pgAdmin; Spring Boot es la API que controla el acceso a los datos.</p></div></section>
+<section class="section"><div class="shell">
+  <div class="endpoint-section" style="margin-bottom:2rem;padding:1.2rem">
+    <h2>Diagnóstico de despliegue</h2>
+    <p><b>Origen actual del navegador:</b> <code>{{ url }}</code></p>
+    <p>Las solicitudes se dirigen a <code>{{ url }}/api/*</code>; desde un equipo remoto no se usa localhost.</p>
+    <p><b>API:</b> {{ health() }} · <b>PostgreSQL:</b> {{ database() }}</p>
+    <button type="button" (click)="check()" [disabled]="checking()">{{ checking() ? 'Comprobando…' : 'Comprobar API y base de datos' }}</button>
+  </div>
+  <div class="flow">
+    <article class="flow-node orange"><span>01</span><strong>Angular</strong><p>Catálogo, carrito, registro, verificación y panel.</p></article><div class="flow-arrow">HTTP / JSON →</div>
+    <article class="flow-node blue"><span>02</span><strong>Spring Boot</strong><p>Seguridad, controladores, servicios y validación.</p></article><div class="flow-arrow">JPA →</div>
+    <article class="flow-node lime"><span>03</span><strong>PostgreSQL</strong><p>Productos, clientes, pedidos, usuarios y tokens.</p></article>
+  </div>
+  <div class="endpoint-section"><div class="section-head"><div><p class="eyebrow">MAPA DE ENDPOINTS</p><h2>Operaciones <span>implementadas.</span></h2></div><p>Los endpoints de administración requieren un token de una cuenta con rol ADMIN.</p></div>
+    <div class="endpoint-table">@for(row of endpoints;track row[0]+row[1]){<div><b [class]="'method ' + row[0].toLowerCase()">{{ row[0] }}</b><code>{{ row[1] }}</code><span>{{ row[2] }}</span></div>}</div>
+  </div>
+  <div class="requirements-grid">
+    <article><span>1</span><h3>Base real</h3><p>PostgreSQL reemplaza H2 y sus tablas pueden revisarse desde pgAdmin.</p></article>
+    <article><span>2</span><h3>Compra invitado</h3><p>El checkout no exige cuenta y descuenta stock dentro de una transacción.</p></article>
+    <article><span>3</span><h3>Cuentas</h3><p>Usuario único, correo único y contraseña almacenada con BCrypt.</p></article>
+    <article><span>4</span><h3>Verificación</h3><p>Código de 6 dígitos por Gmail SMTP, con expiración e intentos limitados.</p></article>
+    <article><span>5</span><h3>Administrador</h3><p>Rol ADMIN requerido tanto en Angular como en Spring Boot.</p></article>
+    <article><span>6</span><h3>CRUD</h3><p>Productos y clientes; pedidos consultables desde administración.</p></article>
+    <article><span>7</span><h3>Siguiente etapa</h3><p>Pasarela de pago real, recuperación de contraseña y despliegue en producción.</p></article>
+  </div>
+</div></section>

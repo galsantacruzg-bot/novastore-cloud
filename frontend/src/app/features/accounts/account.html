@@ -1,0 +1,75 @@
+<section class="account-entry">
+  <div class="shell account-layout">
+    <aside class="account-aside">
+      <a class="account-wordmark" routerLink="/acceso" aria-label="NovaStore">NOVA<span>/</span>STORE</a>
+      <div class="account-pitch">
+        <p class="eyebrow">TU PRÓXIMA EXPERIENCIA DIGITAL</p>
+        <h1>Tu espacio.<br><em>Tu tecnología.</em></h1>
+        <p>Descubre accesorios para tu setup, gaming, estudio y trabajo. Crea tu cuenta y entra a NovaStore.</p>
+        <div class="account-benefits">
+          <span>01 &nbsp; Catálogo tecnológico</span>
+          <span>02 &nbsp; Cuenta personal protegida</span>
+          <span>03 &nbsp; Acceso protegido con contraseña</span>
+        </div>
+      </div>
+      <small>NovaStore · Plataforma académica de comercio electrónico</small>
+    </aside>
+
+    <div class="account-panel">
+      <div class="auth-card">
+        @if (session()) {
+          <p class="eyebrow">SESIÓN ACTIVA</p>
+          <h2>Hola, {{ session()?.username }}.</h2>
+          <p class="auth-intro">{{ session()?.email }} · {{ session()?.role === 'ADMIN' ? 'Administrador' : 'Cliente' }}</p>
+          <a class="btn btn-dark full account-link" routerLink="/">Entrar a NovaStore</a>
+          <button class="link-btn full" type="button" (click)="logout()">Cerrar sesión</button>
+        } @else {
+          <p class="eyebrow">BIENVENIDO A NOVASTORE</p>
+          <h2>{{ mode() === 'login' ? 'Inicia sesión.' : mode() === 'register' ? 'Crea tu cuenta.' : 'Verifica tu correo.' }}</h2>
+          <p class="auth-intro">{{ mode() === 'login' ? 'Accede con tu correo y contraseña.' : mode() === 'register' ? 'Regístrate con tu correo electrónico para acceder.' : 'Ingresa el código que recibiste por correo.' }}</p>
+
+          @if (mode() !== 'verify') {
+            <div class="auth-tabs" role="group" aria-label="Acceso a NovaStore">
+              <button type="button" [class.active]="mode()==='login'" (click)="setMode('login')">Iniciar sesión</button>
+              <button type="button" [class.active]="mode()==='register'" (click)="setMode('register')">Crear cuenta</button>
+            </div>
+          }
+
+          @if (mode() === 'login') {
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+              <label>Correo electrónico o usuario<input formControlName="identifier" autocomplete="username" placeholder="tu@correo.com"></label>
+              <label>Contraseña<input type="password" formControlName="password" autocomplete="current-password" placeholder="Tu contraseña"></label>
+              <button class="btn btn-dark full" type="submit" [disabled]="busy()">{{ busy() ? 'Iniciando sesión…' : 'Entrar a NovaStore' }}</button>
+              <button class="link-btn full" type="button" (click)="setMode('verify')">Ya tengo un código de verificación</button>
+            </form>
+          }
+
+          @if (mode() === 'register') {
+            <form [formGroup]="registerForm" (ngSubmit)="register()">
+              <label>Nombre de usuario<input formControlName="username" autocomplete="username" placeholder="Tu nombre de usuario"></label>
+              <label>Correo electrónico<input type="email" formControlName="email" autocomplete="email" placeholder="tu@correo.com"></label>
+              <label>Contraseña<input type="password" formControlName="password" autocomplete="new-password" placeholder="Mínimo 8 caracteres"></label>
+              <label>Confirmar contraseña<input type="password" formControlName="confirmPassword" autocomplete="new-password" placeholder="Repite tu contraseña"></label>
+              <button class="btn btn-dark full" type="submit" [disabled]="busy()">{{ busy() ? 'Creando cuenta…' : 'Crear cuenta' }}</button>
+              <p class="form-hint">Las cuentas nuevas tienen rol de cliente. Los permisos de administrador se configuran exclusivamente en el servidor.</p>
+            </form>
+          }
+
+          @if (mode() === 'verify') {
+            <form [formGroup]="verifyForm" (ngSubmit)="verify()">
+              <label>Correo registrado<input type="email" formControlName="email" autocomplete="email" placeholder="tu@correo.com"></label>
+              <label>Código de 6 dígitos<input class="code-input" formControlName="code" maxlength="6" inputmode="numeric" autocomplete="one-time-code" placeholder="000000"></label>
+              <button class="btn btn-dark full" type="submit" [disabled]="busy()">{{ busy() ? 'Verificando…' : 'Verificar mi cuenta' }}</button>
+              <button class="link-btn full" type="button" (click)="resend()" [disabled]="busy()">Reenviar código</button>
+              <button class="link-btn full" type="button" (click)="setMode('login')">Volver al inicio de sesión</button>
+            </form>
+          }
+          @if (error()) { <div class="inline-error" role="alert">{{ error() }}</div> }
+          @if (message()) { <div class="inline-success" role="status">{{ message() }}</div> }
+
+        }
+      </div>
+      <p class="account-foot">© NovaStore · Tecnología para ir más lejos</p>
+    </div>
+  </div>
+</section>

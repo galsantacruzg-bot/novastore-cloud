@@ -1,0 +1,11 @@
+# Archivo LEGADO opcional. NO es necesario copiarlo en NovaStore 4.4.
+# Configura las credenciales preferiblemente en el .env.local de la raiz.
+# Si necesitas editar desde aqui, no publiques este archivo.
+# spring.datasource.url=jdbc:postgresql://127.0.0.1:5432/novastore
+# spring.datasource.username=postgres
+# spring.datasource.password=TU_CLAVE
+# app.admin.email=admin@novastore.local
+# app.admin.password=TU_CLAVE_ADMIN
+# server.address=127.0.0.1
+# novastore.public.connector.enabled=true
+# novastore.public.connector.port=8091

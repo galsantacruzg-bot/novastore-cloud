@@ -1,0 +1,14 @@
+{
+  "name": "novastore-cloud-monorepo",
+  "version": "5.0.0",
+  "private": true,
+  "scripts": {
+    "web": "npm --prefix frontend start",
+    "build:web": "npm --prefix frontend run build",
+    "test:web": "npm --prefix frontend run test",
+    "api": "mvn -f backend/pom.xml spring-boot:run",
+    "build:api": "mvn -f backend/pom.xml -DskipTests package",
+    "test:api": "mvn -f backend/pom.xml test",
+    "check:files": "node scripts/revision-estructura.mjs"
+  }
+}

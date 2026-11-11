@@ -1,0 +1,2 @@
+.app-main{min-height:calc(100vh - 220px)}
+.app-main.auth-only{min-height:100vh;}

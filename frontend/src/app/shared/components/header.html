@@ -1,0 +1,30 @@
+<header class="site-header">
+  <div class="ticker" aria-label="Novedades NovaStore">
+    <div class="ticker__track">
+      <span>ACCESORIOS PARA TU SETUP</span><b>•</b>
+      <span>TECNOLOGÍA QUE TE ACOMPAÑA</span><b>•</b>
+      <span>ENVÍOS Y COMPRAS EN ETAPA DEMO</span><b>•</b>
+      <span>ACCESORIOS PARA TU SETUP</span><b>•</b>
+      <span>TECNOLOGÍA QUE TE ACOMPAÑA</span><b>•</b>
+      <span>ENVÍOS Y COMPRAS EN ETAPA DEMO</span><b>•</b>
+    </div>
+  </div>
+
+  <nav class="nav shell">
+    <a class="wordmark" routerLink="/" (click)="closeMenu()"><span>NOVA</span><em>/</em><span>STORE</span></a>
+    <button class="menu-button" type="button" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen()"><span></span><span></span></button>
+
+    <div class="nav-links" [class.open]="menuOpen()">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="closeMenu()">Inicio</a>
+      <a routerLink="/productos" routerLinkActive="active" (click)="closeMenu()">Productos</a>
+      <a routerLink="/integracion" routerLinkActive="active" (click)="closeMenu()">Nosotros</a>
+      @if(auth.isAdmin()) { <a routerLink="/gestion" routerLinkActive="active" (click)="closeMenu()">Administración</a> }
+      <a routerLink="/cuenta" routerLinkActive="active" (click)="closeMenu()">{{ auth.isLoggedIn() ? auth.session()?.username : 'Cuenta' }}</a>
+    </div>
+
+    <div class="nav-actions">
+      <a class="cart-pill" routerLink="/carrito">Carrito <b>{{ cart.count() }}</b></a>
+      @if(auth.isAdmin()) { <a class="admin-pill admin-on" routerLink="/gestion">PANEL ↗</a> }
+    </div>
+  </nav>
+</header>

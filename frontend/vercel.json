@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build:vercel",
+  "outputDirectory": "dist/novastore-angular/browser",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "$schema": "https://openapi.vercel.sh/vercel.json"
+}

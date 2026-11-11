@@ -1,0 +1,43 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "NovaStore · Angular (localhost:4200)",
+      "type": "shell",
+      "command": "npm run web",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "NovaStore · Spring Boot (localhost:8080)",
+      "type": "shell",
+      "command": "npm run api",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "NovaStore · Compilar Angular",
+      "type": "shell",
+      "command": "npm run build:web",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "NovaStore · Pruebas Java",
+      "type": "shell",
+      "command": "npm run test:api",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+<section class="page-hero">
+  <div class="shell">
+    <p class="eyebrow">GET /API/PRODUCTS</p>
+    <h1>Catálogo alimentado <span>por PostgreSQL.</span></h1>
+    <p>Los productos llegan desde Spring Boot y PostgreSQL. Puedes explorar y armar un carrito de demostración; los pedidos se registran por acceso privado.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="shell catalog-layout">
+    <aside class="filters">
+      <div class="filters-title"><strong>Filtros HTTP</strong><button (click)="reset()">Limpiar</button></div>
+      <label>Buscar<input [(ngModel)]="search" (keyup.enter)="load()" placeholder="nombre, marca..."></label>
+      <label>Marca<select [(ngModel)]="brand"><option>Todas</option>@for (item of brands(); track item) { <option [value]="item">{{ item }}</option> }</select></label>
+      <label>Categoría<select [(ngModel)]="category"><option>Todas</option>@for (item of categories(); track item) { <option [value]="item">{{ item }}</option> }</select></label>
+      <label>Precio máximo <strong>{{ maxPrice | currency:'USD':'symbol':'1.0-0' }}</strong><input type="range" min="20" max="300" step="10" [(ngModel)]="maxPrice"></label>
+      <button class="btn btn-dark full" (click)="load()">Consultar API</button>
+      <code class="endpoint-preview">GET /api/products<br>?search={{ search || '...' }}<br>&brand={{ brand }}<br>&category={{ category }}<br>&maxPrice={{ maxPrice }}</code>
+    </aside>
+
+    <div>
+      <div class="result-head"><p><strong>{{ products().length }}</strong> productos</p><span>POSTGRESQL → SPRING → ANGULAR</span></div>
+      @if(message()){<div class="cart-message">{{ message() }}</div>}
+      @if (loading()) { <div class="loading-panel">Solicitando datos…</div> }
+      @else if (error()) { <div class="error-panel"><strong>Error de API</strong><p>{{ error() }}</p></div> }
+      @else {
+        <div class="catalog-grid">
+          @for (product of products(); track product.id) {
+            <article class="catalog-card">
+              <div class="catalog-image"><img [src]="product.image" [alt]="product.name" (error)="$any($event.target).src='assets/products/headphones.svg'"><span>{{ product.code }}</span></div>
+              <div class="catalog-copy">
+                <div class="catalog-meta"><span>{{ product.brand }}</span><span>★ {{ product.rating }}</span></div>
+                <h2>{{ product.name }}</h2><p>{{ product.description }}</p>
+                <div class="chips"><span>{{ product.category }}</span><span>Stock: {{ product.stock }}</span></div>
+                <div class="catalog-bottom"><div><strong>{{ product.price | currency:'USD' }}</strong><small>ID #{{ product.id }}</small></div><button class="buy-btn" [disabled]="product.stock<=0" (click)="add(product)">{{ product.stock>0 ? 'Agregar +' : 'Sin stock' }}</button></div>
+              </div>
+            </article>
+          } @empty { <div class="empty-panel"><strong>0 resultados</strong><p>No se encontraron coincidencias.</p></div> }
+        </div>
+      }
+    </div>
+  </div>
+</section>

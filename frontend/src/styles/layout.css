@@ -1,0 +1,1 @@
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.11;background-image:linear-gradient(rgba(23,23,20,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(23,23,20,.08) 1px,transparent 1px);background-size:38px 38px;z-index:-1}.app-shell{min-height:100vh}

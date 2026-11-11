@@ -1,0 +1,37 @@
+<section class="page-hero admin-hero">
+  <div class="shell">
+    <p class="eyebrow">GESTIÓN / API LAB</p>
+    <h1>Administración <span>con CRUD real.</span></h1>
+    <p>Esta área demuestra la comunicación entre las vistas Angular, los endpoints REST y la base de datos.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="shell">
+    @if (loading()) { <div class="loading-panel">Consultando recursos de la API…</div> }
+    @else if (error()) { <div class="error-panel"><strong>No se pudo cargar el panel</strong><p>{{ error() }}</p></div> }
+    @else {
+      <div class="stats-grid">
+        <article><span>PRODUCTOS</span><strong>{{ stats().products }}</strong><small>GET /api/products</small></article>
+        <article><span>CLIENTES</span><strong>{{ stats().customers }}</strong><small>GET /api/customers</small></article>
+        <article><span>PEDIDOS</span><strong>{{ stats().orders }}</strong><small>GET /api/orders</small></article>
+        <article><span>STOCK TOTAL</span><strong>{{ stats().stock }}</strong><small>Calculado en Angular</small></article>
+      </div>
+    }
+
+    <div class="admin-menu">
+      <a routerLink="/gestion/productos" class="admin-card coral">
+        <span>01</span><h2>Productos</h2><p>Consultar, registrar, editar y eliminar productos.</p><strong>CRUD COMPLETO →</strong>
+      </a>
+      <a routerLink="/gestion/clientes" class="admin-card blue">
+        <span>02</span><h2>Clientes</h2><p>Administrar la información de clientes almacenada.</p><strong>CRUD COMPLETO →</strong>
+      </a>
+      <a routerLink="/gestion/pedidos" class="admin-card lime">
+        <span>03</span><h2>Pedidos</h2><p>Registrar pedidos y consultar su información.</p><strong>POST + GET →</strong>
+      </a>
+      <a routerLink="/integracion" class="admin-card sand">
+        <span>04</span><h2>Integración</h2><p>Ver recursos, endpoints y operaciones de cada interfaz.</p><strong>MAPA TÉCNICO →</strong>
+      </a>
+    </div>
+  </div>
+</section>

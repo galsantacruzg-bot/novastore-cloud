@@ -1,0 +1,19 @@
+/* Pantalla de entrada de NovaStore: una vista, dos acciones (registro e ingreso). */
+.account-entry{min-height:100vh;background:#f2f1e9;display:flex;align-items:stretch}
+.account-layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:0;max-width:1450px;min-height:100vh;padding:36px 0}
+.account-aside{background:#131d29;color:#f8f7ed;padding:clamp(30px,4vw,66px);display:flex;flex-direction:column;justify-content:space-between;min-height:650px;position:relative;overflow:hidden}
+.account-aside:after{content:'';width:400px;height:400px;border:95px solid rgba(199,243,125,.17);border-radius:50%;position:absolute;bottom:-160px;right:-155px;pointer-events:none}
+.account-wordmark{color:inherit;text-decoration:none;font-weight:1000;font-size:1.5rem;letter-spacing:-.08em;position:relative;z-index:1}
+.account-wordmark span{color:#cdf28d;padding:0 5px}
+.account-pitch{position:relative;z-index:1;max-width:530px}.account-pitch .eyebrow{color:#cdf28d;letter-spacing:.16em}
+.account-pitch h1{font:900 clamp(3.5rem,5vw,6rem)/.96 var(--font-display);letter-spacing:-.055em;margin:20px 0}.account-pitch h1 em{font-style:normal;color:#cdf28d}
+.account-pitch p{font-size:1.05rem;color:#d9e0e7;line-height:1.7;max-width:420px}.account-benefits{display:grid;gap:14px;margin-top:44px;padding-top:24px;border-top:1px solid #576070;font-weight:700;font-size:.9rem;letter-spacing:.015em}.account-aside small{color:#b7c5d0;position:relative;z-index:1}
+.account-panel{background:#fff;display:flex;justify-content:center;flex-direction:column;padding:clamp(26px,5vw,72px)}
+.auth-card{width:100%;max-width:500px;margin:0 auto}.auth-card>.eyebrow{color:#56753a;font-weight:850;font-size:.75rem;letter-spacing:.12em}.auth-card h2{font:900 clamp(2.3rem,3.4vw,3.7rem)/1.04 var(--font-display);letter-spacing:-.04em;margin:14px 0 12px}.auth-intro{color:#5f6b77;margin-bottom:30px}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;margin-bottom:26px;border-bottom:1px solid #d9ded8}.auth-tabs button{padding:15px 8px;border:0;background:transparent;color:#566270;font-weight:800;cursor:pointer;border-bottom:3px solid transparent}.auth-tabs button.active{border-bottom-color:#141d29;color:#111b27}
+.auth-card form{display:grid;gap:15px}.auth-card label{font-size:.85rem;font-weight:750;color:#1b2937;display:grid;gap:8px}.auth-card input{min-height:54px;border-radius:7px;background:#fafbf9;border:1px solid #c9d0d0;padding:0 15px;color:#111b27;width:100%}.auth-card input:focus{outline:2px solid #a6d879;outline-offset:1px}
+.auth-card .btn{min-height:54px;display:flex;align-items:center;justify-content:center;margin-top:8px;text-decoration:none}.account-link{margin-top:24px}.link-btn{border:0;background:transparent;padding:10px;text-align:center;color:#304c27;font-weight:750;cursor:pointer}.full{width:100%}.code-input{font-size:1.7rem;letter-spacing:.25em;text-align:center}
+.form-hint{font-size:.78rem;color:#66737a;line-height:1.55;margin-top:15px}.inline-error{background:#fff0ed;border:1px solid #d84b3a;color:#933323;padding:12px 15px;margin-top:16px;font-size:.87rem}.inline-success{background:#eaf6e1;border:1px solid #81a36a;color:#305c27;padding:12px 15px;margin-top:16px;font-size:.87rem}
+.account-foot{font-size:.76rem;color:#8d979a;text-align:center;margin:36px 0 0}
+@media(max-width:920px){.account-layout{grid-template-columns:1fr;padding:0}.account-aside{min-height:300px;padding:36px 28px;gap:30px}.account-pitch h1{font-size:3.5rem}.account-benefits{display:none}.account-panel{padding:36px 25px 45px}.account-foot{margin-top:24px}}
+@media(max-width:460px){.account-aside{min-height:270px}.account-pitch h1{font-size:2.9rem}.account-pitch p{font-size:.9rem}.auth-card h2{font-size:2.2rem}}
